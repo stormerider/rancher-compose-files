@@ -1,0 +1,15 @@
+version: '2'
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_ARBITRARY: '1'
+      PMA_HOST: REDACTED
+      PMA_PASSWORD: REDACTED
+      PMA_USER: REDACTED
+    volumes:
+    - /sessions
+    ports:
+    - 8081:80/tcp
+    labels:
+      io.rancher.container.pull_image: always

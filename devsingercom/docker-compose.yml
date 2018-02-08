@@ -1,0 +1,26 @@
+version: '2'
+services:
+  nginx:
+    image: stormerider/docker-nginx-php-fpm:v1.0.4.9
+    environment:
+      NEWRELIC_APPNAME: DevSinger.com
+    volumes:
+    - /home/rancher/efs/devsinger.com/public_html:/usr/share/nginx/www
+    - /home/rancher/newrelic.license:/newrelic.license
+    ports:
+    - 8006:80/tcp
+    command:
+    - /bin/bash
+    - /start.sh
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_ne: role=management
+  extplorer:
+    image: stormerider/docker-extplorer
+    volumes:
+    - /home/rancher/efs/devsinger.com/public_html:/data
+    - /home/rancher/efs/devsinger.com/extplorer-config:/var/www/eXtplorer/config
+    labels:
+      io.rancher.scheduler.affinity:host_label: role=management
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'

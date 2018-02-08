@@ -1,0 +1,13 @@
+version: '2'
+services:
+  newrelic-infra:
+    privileged: true
+    image: stormerider/newrelic-infra
+    environment:
+      NRIA_LICENSE_KEY: 97f159202dd16cecd1bd3817d7e0530c3ffe3a53
+    network_mode: host
+    volumes:
+    - /:/host:ro
+    - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      io.rancher.scheduler.global: 'true'

@@ -1,0 +1,408 @@
+version: '2'
+services:
+  loadbalancer:
+    start_on_create: true
+    lb_config:
+      certs:
+      - vaedrennan.com
+      - shendilavri.com
+      - accessiblesex.com
+      - alden.nu
+      - cialeah.com
+      - davidbridger.com
+      - daynahart.com
+      - jasblackthorne,com
+      - jasmeralia.com
+      - longarmquilting.ca
+      - mypatronpress.com
+      - nonnyblackthorne.com
+      - robert-sloan.com
+      - romancedivas.com
+      - stormerider.com
+      - twilightsdawn.com
+      - myauthorspress.com
+      - desertroseark.com
+      - devsinger.com
+      - dreamscarred.com
+      config: |-
+        defaults
+            timeout client 900s
+            timeout connect 5000
+            timeout server 900s
+      default_cert: windsofstorm.com
+      port_rules:
+      - backend_name: asex1
+        hostname: '*accessiblesex.com'
+        priority: 1
+        protocol: http
+        service: accessiblesexcom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: asex2
+        hostname: '*accessiblesex.com'
+        priority: 2
+        protocol: https
+        service: accessiblesexcom/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: aldene1
+        hostname: '*alden.nu'
+        path: /wfm/
+        priority: 3
+        protocol: http
+        service: aldennu/extplorer
+        source_port: 80
+        target_port: 8088
+      - backend_name: aldene2
+        hostname: '*alden.nu'
+        path: /wfm/
+        priority: 4
+        protocol: https
+        service: aldennu/extplorer
+        source_port: 443
+        target_port: 80
+      - backend_name: alden1
+        hostname: '*alden.nu'
+        priority: 5
+        protocol: http
+        service: aldennu/mt
+        source_port: 80
+        target_port: 80
+      - backend_name: alden2
+        hostname: '*alden.nu'
+        priority: 6
+        protocol: https
+        service: aldennu/mt
+        source_port: 443
+        target_port: 80
+      - backend_name: cia1
+        hostname: '*cialeah.com'
+        priority: 7
+        protocol: http
+        service: cialeahcom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: cia2
+        hostname: '*cialeah.com'
+        priority: 8
+        protocol: https
+        service: cialeahcom/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: db1
+        hostname: '*davidbridger.com'
+        priority: 9
+        protocol: http
+        service: davidbridgercom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: db2
+        hostname: '*davidbridger.com'
+        priority: 10
+        protocol: https
+        service: davidbridgercom/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: dh1
+        hostname: '*daynahart.com'
+        priority: 11
+        protocol: http
+        service: daynahartcom/wpmu
+        source_port: 80
+        target_port: 80
+      - backend_name: dh2
+        hostname: '*daynahart.com'
+        priority: 12
+        protocol: https
+        service: daynahartcom/wpmu
+        source_port: 443
+        target_port: 80
+      - backend_name: shend5
+        hostname: '*desertroseark.com'
+        priority: 13
+        protocol: http
+        service: shendilavricom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: shend6
+        hostname: '*desertroseark.com'
+        priority: 14
+        protocol: https
+        service: shendilavricom/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: deve1
+        hostname: '*devsinger.com'
+        path: /wfm/
+        priority: 15
+        protocol: http
+        service: devsingercom/extplorer
+        source_port: 80
+        target_port: 8088
+      - backend_name: deve2
+        hostname: '*devsinger.com'
+        path: /wfm/
+        priority: 16
+        protocol: https
+        service: devsingercom/extplorer
+        source_port: 443
+        target_port: 8088
+      - backend_name: dev1
+        hostname: '*devsinger.com'
+        priority: 17
+        protocol: http
+        service: devsingercom/nginx
+        source_port: 80
+        target_port: 80
+      - backend_name: dev2
+        hostname: '*devsinger.com'
+        priority: 18
+        protocol: https
+        service: devsingercom/nginx
+        source_port: 443
+        target_port: 80
+      - backend_name: dst1
+        hostname: test.dreamscarred.com
+        priority: 19
+        protocol: http
+        service: dreamscarredcom/apache2
+        source_port: 80
+        target_port: 80
+      - backend_name: dst2
+        hostname: test.dreamscarred.com
+        priority: 20
+        protocol: https
+        service: dreamscarredcom/apache2
+        source_port: 443
+        target_port: 80
+      - backend_name: dse1
+        hostname: '*dreamscarred.com'
+        path: /wfm/
+        priority: 21
+        protocol: http
+        service: dreamscarredcom/extplorer
+        source_port: 80
+        target_port: 8088
+      - backend_name: dse2
+        hostname: '*dreamscarred.com'
+        path: /wfm/
+        priority: 22
+        protocol: https
+        service: dreamscarredcom/extplorer
+        source_port: 443
+        target_port: 8088
+      - backend_name: ds1
+        hostname: '*dreamscarred.com'
+        priority: 23
+        protocol: http
+        service: dreamscarredcom/nginx
+        source_port: 80
+        target_port: 80
+      - backend_name: ds2
+        hostname: '*dreamscarred.com'
+        priority: 24
+        protocol: https
+        service: dreamscarredcom/nginx
+        source_port: 443
+        target_port: 80
+      - backend_name: storm3
+        hostname: '*jasblackthorne.com'
+        priority: 25
+        protocol: http
+        service: stormeridercom/wpmu
+        source_port: 80
+        target_port: 80
+      - backend_name: storm4
+        hostname: '*jasblackthorne.com'
+        priority: 26
+        protocol: https
+        service: stormeridercom/wpmu
+        source_port: 443
+        target_port: 80
+      - backend_name: storm5
+        hostname: '*jasmeralia.com'
+        priority: 27
+        protocol: http
+        service: stormeridercom/wpmu
+        source_port: 80
+        target_port: 80
+      - backend_name: storm6
+        hostname: '*jasmeralia.com'
+        priority: 28
+        protocol: https
+        service: stormeridercom/wpmu
+        source_port: 443
+        target_port: 80
+      - backend_name: laq1
+        hostname: '*longarmquilting.ca'
+        priority: 29
+        protocol: http
+        service: longarmquiltingca/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: laq2
+        hostname: '*longarmquilting.ca'
+        priority: 30
+        protocol: https
+        service: longarmquiltingca/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: map1
+        hostname: '*myauthorspress.com'
+        priority: 31
+        protocol: http
+        service: myauthorspresscom/wpmu
+        source_port: 80
+        target_port: 80
+      - backend_name: map2
+        hostname: '*myauthorspress.com'
+        priority: 32
+        protocol: https
+        service: myauthorspresscom/wpmu
+        source_port: 443
+        target_port: 80
+      - backend_name: mpp1
+        hostname: '*mypatronpress.com'
+        priority: 33
+        protocol: http
+        service: mypatronpresscom/wpmu
+        source_port: 80
+        target_port: 80
+      - backend_name: mpp2
+        hostname: '*mypatronpress.com'
+        priority: 34
+        protocol: https
+        service: mypatronpresscom/wpmu
+        source_port: 443
+        target_port: 80
+      - backend_name: nonny1
+        hostname: '*nonnyblackthorne.com'
+        priority: 35
+        protocol: http
+        service: nonnyblackthornecom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: nonny2
+        hostname: '*nonnyblackthorne.com'
+        priority: 36
+        protocol: https
+        service: nonnyblackthornecom/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: rs1
+        hostname: '*robert-sloan.com'
+        priority: 37
+        protocol: http
+        service: robertsloancom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: rs2
+        hostname: '*robert-sloan.com'
+        priority: 38
+        protocol: https
+        service: robertsloancom/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: rd1
+        hostname: '*romancedivas.com'
+        priority: 39
+        protocol: http
+        service: romancedivascom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: rd2
+        hostname: '*romancedivas.com'
+        priority: 40
+        protocol: https
+        service: romancedivascom/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: shend1
+        hostname: '*shendilavri.com'
+        priority: 41
+        protocol: http
+        service: shendilavricom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: shend2
+        hostname: '*shendilavri.com'
+        priority: 42
+        protocol: https
+        service: shendilavricom/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: storm1
+        hostname: '*stormerider.com'
+        priority: 43
+        protocol: http
+        service: stormeridercom/wpmu
+        source_port: 80
+        target_port: 80
+      - backend_name: storm2
+        hostname: '*stormerider.com'
+        priority: 44
+        protocol: https
+        service: stormeridercom/wpmu
+        source_port: 443
+        target_port: 80
+      - backend_name: shend3
+        hostname: '*twilightsdawn.com'
+        priority: 45
+        protocol: http
+        service: shendilavricom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: shend4
+        hostname: '*twilightsdawn.com'
+        priority: 46
+        protocol: https
+        service: shendilavricom/wp
+        source_port: 443
+        target_port: 443
+      - backend_name: vae1
+        hostname: '*vaedrennan.com'
+        priority: 47
+        protocol: http
+        service: vaedrennancom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: vae2
+        hostname: '*vaedrennan.com'
+        priority: 48
+        protocol: https
+        service: vaedrennancom/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: wos1
+        hostname: '*windsofstorm.com'
+        priority: 49
+        protocol: http
+        service: windsofstormcom/wp
+        source_port: 80
+        target_port: 80
+      - backend_name: wos2
+        hostname: '*windsofstorm.com'
+        priority: 50
+        protocol: https
+        service: windsofstormcom/wp
+        source_port: 443
+        target_port: 80
+      - backend_name: default2
+        priority: 51
+        protocol: https
+        service: default/nginx
+        source_port: 443
+        target_port: 80
+      - backend_name: default1
+        priority: 52
+        protocol: http
+        service: default/nginx
+        source_port: 80
+        target_port: 80
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
+      strategy: recreate

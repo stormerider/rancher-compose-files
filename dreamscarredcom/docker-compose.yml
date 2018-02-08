@@ -1,0 +1,44 @@
+version: '2'
+services:
+  apache2:
+    image: stormerider/docker-apache-php:latest
+    environment:
+      APACHE2_HOSTNAME: dreamscarred.com
+    stdin_open: true
+    volumes:
+    - /home/rancher/efs/dreamscarred.com/public_html:/var/www/html
+    tty: true
+    ports:
+    - 8020:80/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_ne: role=management
+      io.rancher.scheduler.global: 'true'
+  nginx:
+    image: stormerider/docker-nginx-php-fpm:v1.0.4.9
+    environment:
+      NEWRELIC_APPNAME: DreamScarred.com
+    volumes:
+    - /home/rancher/efs/dreamscarred.com/public_html:/usr/share/nginx/www
+    - /home/rancher/newrelic.license:/newrelic.license
+    ports:
+    - 8007:80/tcp
+    command:
+    - /bin/bash
+    - /start.sh
+    labels:
+      io.rancher.scheduler.affinity:host_label: newrelic.enabled=true
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
+  extplorer:
+    image: stormerider/docker-extplorer
+    stdin_open: true
+    volumes:
+    - /home/rancher/efs/dreamscarred.com/public_html:/data
+    - /home/rancher/efs/dreamscarred.com/extplorer-config:/var/www/eXtplorer/config
+    tty: true
+    ports:
+    - 8033:8088/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_ne: role=management

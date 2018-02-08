@@ -1,0 +1,34 @@
+version: '2'
+services:
+  wpmu:
+    image: stormerider/rancher-wpmu-nginx-trusty:v1.0.4.14
+    environment:
+      NEWRELIC_APPNAME: MyPatronPress.com
+      WORDPRESS_AUTH_KEY: REDACTED
+      WORDPRESS_AUTH_SALT: REDACTED
+      WORDPRESS_DB_HOST: REDACTED
+      WORDPRESS_DB_NAME: mypatronpress_wp
+      WORDPRESS_DB_PASS: REDACTED
+      WORDPRESS_DB_PRFX: REDACTED
+      WORDPRESS_DB_USER: patronpress
+      WORDPRESS_LOGGED_IN_KEY: REDACTED
+      WORDPRESS_LOGGED_IN_SALT: REDACTED
+      WORDPRESS_MU_DOM: mypatronpress.com
+      WORDPRESS_NONCE_KEY: REDACTED
+      WORDPRESS_NONCE_SALT: REDACTED
+      WORDPRESS_SECURE_AUTH_KEY: REDACTED
+      WORDPRESS_SECURE_AUTH_SALT: REDACTED
+    stdin_open: true
+    volumes:
+    - /home/rancher/efs/mypatronpress.com/wp-content:/usr/share/nginx/www/wp-content
+    - /home/rancher/newrelic.license:/newrelic.license
+    tty: true
+    ports:
+    - 8010:80/tcp
+    command:
+    - /bin/bash
+    - /start.sh
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_ne: role=management
+      io.rancher.scheduler.global: 'true'

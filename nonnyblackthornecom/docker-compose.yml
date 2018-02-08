@@ -1,0 +1,31 @@
+version: '2'
+services:
+  wp:
+    image: stormerider/rancher-wordpress-nginx-trusty:v1.0.4.14
+    environment:
+      NEWRELIC_APPNAME: NonnyBlackthorne.com
+      WORDPRESS_AUTH_KEY: REDACTED
+      WORDPRESS_AUTH_SALT: REDACTED
+      WORDPRESS_DB_HOST: REDACTED
+      WORDPRESS_DB_NAME: nonny_main
+      WORDPRESS_DB_PASS: REDACTED
+      WORDPRESS_DB_PRFX: REDACTED
+      WORDPRESS_DB_USER: nonny_wp
+      WORDPRESS_LOGGED_IN_KEY: REDACTED
+      WORDPRESS_LOGGED_IN_SALT: REDACTED
+      WORDPRESS_NONCE_KEY: REDACTED
+      WORDPRESS_NONCE_SALT: REDACTED
+      WORDPRESS_SECURE_AUTH_KEY: REDACTED
+      WORDPRESS_SECURE_AUTH_SALT: REDACTED
+    volumes:
+    - /home/rancher/efs/nonnyblackthorne.com/wp-content:/usr/share/nginx/www/wp-content
+    - /home/rancher/newrelic.license:/newrelic.license
+    ports:
+    - 8011:80/tcp
+    command:
+    - /bin/bash
+    - /start.sh
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_ne: role=management
+      io.rancher.scheduler.global: 'true'

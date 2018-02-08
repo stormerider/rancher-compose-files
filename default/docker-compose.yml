@@ -1,0 +1,18 @@
+version: '2'
+services:
+  nginx:
+    image: stormerider/docker-nginx-php-fpm:v1.0.4.9
+    environment:
+      NEWRELIC_APPNAME: windsofstorm.net
+    volumes:
+    - /home/rancher/efs/windsofstorm.net-default:/usr/share/nginx/www/
+    - /home/rancher/newrelic.license:/newrelic.license
+    ports:
+    - 8005:80/tcp
+    command:
+    - /bin/bash
+    - /start.sh
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_ne: role=management
+      io.rancher.scheduler.global: 'true'

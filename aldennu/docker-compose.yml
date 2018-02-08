@@ -1,0 +1,28 @@
+version: '2'
+services:
+  mt:
+    image: stormerider/docker-nginx-mt:v1.0.4.6
+    environment:
+      NEWRELIC_APPNAME: Alden.nu
+    volumes:
+    - /home/rancher/efs/alden.nu/content:/usr/share/nginx/www/
+    - /home/rancher/efs/alden.nu/nginx-logs:/var/log/nginx
+    - /home/rancher/newrelic.license:/newrelic.license
+    command:
+    - /bin/bash
+    - /start.sh
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_ne: role=management
+      io.rancher.scheduler.global: 'true'
+  extplorer:
+    image: stormerider/docker-extplorer
+    stdin_open: true
+    volumes:
+    - /home/rancher/efs/alden.nu/content:/data
+    - /home/rancher/efs/alden.nu/extplorer-config:/var/www/eXtplorer/config
+    tty: true
+    labels:
+      io.rancher.scheduler.affinity:host_label: role=management
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'

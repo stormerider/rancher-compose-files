@@ -1,0 +1,34 @@
+version: '2'
+services:
+  wpmu:
+    image: stormerider/rancher-wpmu-nginx-trusty:v1.0.4.14
+    environment:
+      NEWRELIC_APPNAME: DaynaHart.com
+      WORDPRESS_AUTH_KEY: REDACTED
+      WORDPRESS_AUTH_SALT: REDACTED
+      WORDPRESS_DB_HOST: REDACTED
+      WORDPRESS_DB_NAME: daynahart_wpmu
+      WORDPRESS_DB_PASS: REDACTED
+      WORDPRESS_DB_PRFX: REDACTED
+      WORDPRESS_DB_USER: dayna
+      WORDPRESS_LOGGED_IN_KEY: REDACTED
+      WORDPRESS_LOGGED_IN_SALT: REDACTED
+      WORDPRESS_MU_DOM: daynahart.com
+      WORDPRESS_NONCE_KEY: REDACTED
+      WORDPRESS_NONCE_SALT: REDACTED
+      WORDPRESS_PLUGINS: accesspress-custom-css,accesspress-social-counter,accesspress-social-icons,accesspress-social-share,accesspress-twitter-feed,black-studio-tinymce-widget,contact-form-7,contact-form-7-to-database-extension,easy-digital-downloads,google-analyticator,gotmls,jetpack,kstats-reloaded,mailchimp-wp,mythemeshop-connect,nginx-helper,options-framework,page-links-to,photo-video-gallery-master,revslider,simple-maintenance-mode,siteorigin-panels,wordfence,wordpress-importer,wordpress-mu-domain-mapping,wp-dbmanager,wp-mail-smtp,wp-pagenavi,wp-review,wp-shortcode,wp-tab-widget
+      WORDPRESS_SECURE_AUTH_KEY: REDACTED
+      WORDPRESS_SECURE_AUTH_SALT: REDACTED
+      WORDPRESS_THEMES: BloxPro2,NeuroPro4,accesspress-ray-pro,acreage,agripro,altitude,aspirepro,businesspro4,charitypure,cordonbleu,cyberchimpspro,delight,eclipsepro3,eshopper-pro,finepro,fitness-lite,fitnesspro,grandstand,ifeaturepro5,iribbonpro2,lawyeria-lite,minivet,mobile-first-v.next,neuropro3,oblique,onetone,parallaxpro,primopro,primopro2,promotional-bar,radiant,rambo,resonance-pro,responsivepro,skt-cutsnstyle-lite,skt-fitness-pro,vertical
+    volumes:
+    - /home/rancher/efs/daynahart.com/wp-content:/usr/share/nginx/www/wp-content
+    - /home/rancher/newrelic.license:/newrelic.license
+    ports:
+    - 8004:80/tcp
+    command:
+    - /bin/bash
+    - /start.sh
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_ne: role=management
+      io.rancher.scheduler.global: 'true'
